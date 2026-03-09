@@ -862,7 +862,7 @@
     </div>
 
     <p class="reveal" style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:14px; color:rgba(255,255,255,0.35); margin-top:20px; line-height:1.7;">
-      Esos colores están reservados<br>para la quinceañera y su corte.
+      Esos colores están reservados<br>para la quinceañera.
     </p>
   </section>
 
@@ -892,6 +892,8 @@
     <p class="confirm-desc reveal">
       Por favor confirma antes del<br>8 de marzo de 2025
     </p>
+    <p id="invite-info" style="text-align:center; margin-top:10px; font-size:11px; color:rgba(255,255,255,0.45);"></p>
+
 
     <div id="confirm-form" class="form-group reveal">
       <div class="form-field">
@@ -1012,6 +1014,46 @@
 
     // ── FORM ──
     const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyNt-oe52-PBzHFFQHtgTPpm1dFxSaAhiXk-nsNME6Y3kQ7j8ShSDUDi-9R_8LkQUYK/exec';
+
+    // ── LEER PARAMETROS DE INVITACIÓN ──
+function loadInvitationParams() {
+
+  const params = new URLSearchParams(window.location.search);
+
+  const nombre = params.get("nombre");
+  const invitados = params.get("invitados");
+
+  if (nombre) {
+    const nameField = document.getElementById("f-name");
+    nameField.value = decodeURIComponent(nombre);
+  }
+
+  if (invitados) {
+    const guestSelect = document.getElementById("f-guests");
+
+    guestSelect.value = invitados;
+
+    const options = guestSelect.querySelectorAll("option");
+
+    options.forEach(opt => {
+
+      if (opt.value && parseInt(opt.value) > parseInt(invitados)) {
+        opt.style.display = "none";
+      }
+
+    });
+  }
+
+  if (nombre && invitados) {
+    const info = document.getElementById("invite-info");
+
+    info.innerHTML =
+      `Invitación reservada para <strong>${decodeURIComponent(nombre)}</strong> · ${invitados} persona(s)`;
+  }
+
+}
+
+window.addEventListener("DOMContentLoaded", loadInvitationParams);
 
     function submitForm() {
       const name   = document.getElementById('f-name').value.trim();
