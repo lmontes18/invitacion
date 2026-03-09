@@ -892,7 +892,7 @@
     <span class="section-label reveal">Reserva tu lugar</span>
     <h2 class="section-title reveal">Confirmar asistencia</h2>
     <p class="confirm-desc reveal">
-      Por favor confirma antes del<br>8 de marzo de 2025
+      Por favor confirma antes del<br>30 de marzo de 2026
     </p>
     <p id="invite-info" style="text-align:center; margin-top:10px; font-size:20px; color:rgb(255, 255, 255);"></p>
 
@@ -916,7 +916,7 @@
         <label>¿Asistirás?</label>
         <select id="f-attend">
           <option value="">Selecciona</option>
-          <option value="si">Sí, con mucho gusto 🎉</option>
+          <option value="si">Sí, con mucho gusto </option>
           <option value="no">No podré asistir</option>
         </select>
       </div>
@@ -1034,6 +1034,8 @@ function loadInvitationParams() {
     const guestSelect = document.getElementById("f-guests");
 
     guestSelect.value = invitados;
+    guestSelect.disabled = true;
+
 
     const options = guestSelect.querySelectorAll("option");
 
@@ -1115,7 +1117,7 @@ window.addEventListener("DOMContentLoaded", loadInvitationParams);
   <div class="music-bar" id="music-bar">
     <button class="music-btn" id="music-btn" onclick="toggleMusic()">▶</button>
     <div class="music-info">
-      <p class="music-title">Vals clásico instrumental</p>
+      <p class="music-title">A Thousand Years * by Christina Perri</p>
       <p class="music-sub">Música de fondo · XV Años</p>
     </div>
     <div class="music-wave paused" id="music-wave">
